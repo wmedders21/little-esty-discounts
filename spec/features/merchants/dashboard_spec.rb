@@ -214,4 +214,38 @@ RSpec.describe 'merchant dashboard page' do
       click_link("#{invoice_item_1.invoice_id}")
       expect(page).to have_current_path("/merchants/#{merchant.id}/invoices/#{invoice_item_1.invoice_id}")
   end
+
+    it 'shows item ready to ship from oldest to newest' do
+      merchant = Merchant.create(name: "Braum's")
+      item1 = merchant.items.create(name: "Toast", description: "Let it rip!", unit_price: 1000)
+      item2 = merchant.items.create(name: "Butter", description: "Let it rip!", unit_price: 1000)
+      item3 = merchant.items.create(name: "Grenade", description: "Let it rip!", unit_price: 1000)
+      item4 = merchant.items.create(name: "Beyblade", description: "Let it rip!", unit_price: 1000)
+
+      bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+      nate = Customer.create!(first_name: "Nate", last_name: "Chaffee")
+      barty = Customer.create!(first_name: "Barty", last_name: "Dasher")
+      zeke = Customer.create!(first_name: "Zeke", last_name: "Bristol")
+      flipper = Customer.create!(first_name: "Flipper", last_name: "McDaniel")
+      tildy = Customer.create!(first_name: "Tildy", last_name: "Lynch")
+
+      invoice_1 = bob.invoices.create!(status: 1)
+      invoice_2 = barty.invoices.create!(status: 1)
+      invoice_3 = nate.invoices.create!(status: 1)
+      invoice_4 = zeke.invoices.create!(status: 1)
+
+
+      invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:3, unit_price: 1000, status: 1)
+      invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_2.id, quantity:3, unit_price: 3000, status: 1)
+      invoice_item_3 = item4.invoice_items.create(invoice_id:invoice_3.id, quantity:3, unit_price: 3000, status: 1)
+      invoice_item_4 = item3.invoice_items.create(invoice_id:invoice_4.id, quantity:3, unit_price: 3000, status: 1)
+
+
+      visit "/merchants/#{merchant.id}/dashboard"
+      save_and_open_page
+      find("ol#ready_to_ship li:nth-child(1)").should have_content("Grenade")
+      find("ol#ready_to_ship li:nth-child(2)").should have_content("Beyblade")
+      find("ol#ready_to_ship li:nth-child(3)").should have_content("Butter")
+      find("ol#ready_to_ship li:nth-child(4)").should have_content("Toast")
+  end
 end
