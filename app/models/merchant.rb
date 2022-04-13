@@ -28,6 +28,14 @@ class Merchant < ApplicationRecord
   end
 
   def ready_to_ship
-    invoice_items.where(status: "packaged")
+    invoice_items.where(status: "packaged").order('created_at DESC')
   end
+
+  def invoice_dates
+    invoice.created_at.strftime("%A, %B %d, %Y")
+  end
+
+  # def invoice_dates
+  #   invoice.created_at.strftime("%A, %B %d, %Y")
+  # end
 end
