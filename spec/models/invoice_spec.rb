@@ -87,7 +87,7 @@ RSpec.describe Invoice, type: :model do
       InvoiceItem.create!(invoice_id: invoice_10.id, item_id: item_10.id, quantity: 1, status: 2)
       InvoiceItem.create!(invoice_id: invoice_11.id, item_id: item_11.id, quantity: 1, status: 2)
 
-      expect(Invoice.sorted_by_newest.take(5)).t0 eq([invoice_11, invoice_10, invoice_9, invoice_8, invoice_7])
+      expect(Invoice.sorted_by_newest.take(5)).to eq([invoice_11, invoice_10, invoice_9, invoice_8, invoice_7])
     end
   end
 end
