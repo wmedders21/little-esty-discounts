@@ -67,6 +67,41 @@ RSpec.describe Merchant, type: :model do
 
         expect(merchant_1.most_popular_items).to eq([item_8, item_1, item_4, item_3, item_6])
       end
+
+      describe '.distinct_invoices' do
+        it 'returns all invoices that have any of the merchants items without duplicates' do
+          merchant_1 = Merchant.create!(name: "Jim's Rare Guitars")
+          item_1 = merchant_1.items.create!(name: "1959 Gibson Les Paul",
+                                          description: "Tobacco Burst Finish, Rosewood Fingerboard",
+                                          unit_price: 25000000)
+          item_2 = merchant_1.items.create!(name: "1954 Fender Stratocaster",
+                                          description: "Seafoam Green Finish, Maple Fingerboard",
+                                          unit_price: 10000000)
+          item_3 = merchant_1.items.create!(name: "1968 Gibson SG",
+                                          description: "Cherry Red Finish, Rosewood Fingerboard",
+                                          unit_price: 400000)
+          merchant_2 = Merchant.create!(name: "Bob's Less Rare Guitars")
+          item_4 = merchant_2.items.create!(name: "2006 Ibanez GX500",
+                                            description: "Green Burst Finish, Rosewood Fingerboard",
+                                            unit_price: 50000)
+          item_5 = merchant_2.items.create!(name: "2013 ESP GH100",
+                                            description: "Black Finish, Ebony Fingerboard",
+                                            unit_price: 40000)
+          customer_1 = Customer.create!(first_name: "Guthrie", last_name: "Govan")
+          invoice_1 = customer_1.invoices.create!(status: 1)
+          invoice_2 = customer_1.invoices.create!(status: 0)
+          invoice_3 = customer_1.invoices.create!(status: 1)
+          invoice_item_1 = InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: item_1.unit_price, status: 0)
+          invoice_item_2 = InvoiceItem.create!(item: item_2, invoice: invoice_2, quantity: 25, unit_price: item_2.unit_price, status: 0)
+          invoice_item_3 = InvoiceItem.create!(item: item_3, invoice: invoice_2, quantity: 1, unit_price: item_3.unit_price, status: 0)
+          invoice_item_4 = InvoiceItem.create!(item: item_4, invoice: invoice_1, quantity: 31, unit_price: item_4.unit_price, status: 0)
+          invoice_item_5 = InvoiceItem.create!(item: item_5, invoice: invoice_1, quantity: 35, unit_price: item_5.unit_price, status: 0)
+          invoice_item_5 = InvoiceItem.create!(item: item_4, invoice: invoice_3, quantity: 35, unit_price: item_5.unit_price, status: 0)
+
+          expect(merchant_1.distinct_invoices).to eq([invoice_1, invoice_2])
+          expect(merchant_1.distinct_invoices.length).to eq(2)
+        end
+      end
     end
   end
 end

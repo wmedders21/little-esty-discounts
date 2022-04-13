@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get '/:id/items/:id/edit', to: 'items#edit'
     patch '/:id/items/:id', to: 'items#update'
     get '/:id/invoices', to: 'invoices#index'
+    get '/:id/invoices/:id', to: 'invoices#show'
   end
 
   resources :admin, only: [:index]
