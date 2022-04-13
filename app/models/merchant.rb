@@ -11,7 +11,7 @@ class Merchant < ApplicationRecord
     .where('transactions.result = ?', 'success')
     .order('count(customers.id) desc')
   end
-  
+
   def items_and_invoice_items
     items.joins(:invoice_items)
     .select('items.*, invoice_items.quantity, invoice_items.unit_price')
@@ -25,5 +25,9 @@ class Merchant < ApplicationRecord
     .group('items.id')
     .order('total_revenue desc')
     .limit(5)
+  end
+
+  def ready_to_ship
+    invoice_items.where(status: "packaged")
   end
 end

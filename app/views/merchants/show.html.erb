@@ -11,3 +11,12 @@
     </li>
     <% end %>
   </ol>
+<br>
+<h3> Ready to Ship </h3>
+  <ol id="ready_to_ship" type="1">
+    <%  @ready_to_ship.each do |invoice_item| %>
+    <li>
+        <%= invoice_item.item.name %>
+    </li>
+    <% end %>
+  </ol>
