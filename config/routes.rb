@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     get '/:id/items/:id', to: 'items#show'
     get '/:id/items/:id/edit', to: 'items#edit'
     patch '/:id/items/:id', to: 'items#update'
-
     get '/:id/dashboard', to: 'merchants#dashboard'
   end
 
