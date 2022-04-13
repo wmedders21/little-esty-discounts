@@ -4,13 +4,14 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
-  
+
   def top_five
     customers.joins(:transactions)
     .group(:id)
     .where('transactions.result = ?', 'success')
     .order('count(customers.id) desc')
-
+  end
+  
   def items_and_invoice_items
     items.joins(:invoice_items)
     .select('items.*, invoice_items.quantity, invoice_items.unit_price')
