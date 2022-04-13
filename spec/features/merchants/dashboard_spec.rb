@@ -213,6 +213,5 @@ RSpec.describe 'merchant dashboard page' do
       visit "/merchants/#{merchant.id}/dashboard"
       click_link("#{invoice_item_1.invoice_id}")
       expect(page).to have_current_path("/merchants/#{merchant.id}/invoices/#{invoice_item_1.invoice_id}")
-
   end
 end
