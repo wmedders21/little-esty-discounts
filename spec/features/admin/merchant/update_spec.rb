@@ -9,9 +9,9 @@ RSpec.describe 'the Admin Merchant Update page' do
   it 'takes me to the edit page for the merchant' do
     visit "/admin/merchants/#{@merchant_1.id}"
 
-    click_link "Update Merchant Information"
-
-    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/update")
+    expect(page).to have_content("Update Merchant Information")
+    expect(page).to have_content("#{@merchant_1.name}")
+    expect(page).to_not have_content("#{@merchant_2.name}")
   end
 
   it 'goes to the edit page form which has current merchant attributes' do
@@ -19,9 +19,7 @@ RSpec.describe 'the Admin Merchant Update page' do
 
     click_link "Update Merchant Information"
 
-    expect(page).to have_content("Update Merchant Information")
-    expect(page).to have_content("#{@merchant_1.name}")
-    expect(page).to_not have_content("#{@merchant_2.name}")
+    expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}/edit")
   end
 
   it 'updates the information and reroutes to admin merch show' do
@@ -31,7 +29,7 @@ RSpec.describe 'the Admin Merchant Update page' do
 
     fill_in 'Name', with: "Not Mollys Anymore"
 
-    click_button 'Submit'
+    click_button 'Save'
 
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
 
