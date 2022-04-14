@@ -3,4 +3,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :item
 
   enum status: [:pending, :packaged, :shipped]
+
+  def self.total_revenue
+    sum('unit_price * quantity')
+  end
 end
