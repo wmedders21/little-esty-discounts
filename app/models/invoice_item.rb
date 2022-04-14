@@ -4,6 +4,11 @@ class InvoiceItem < ApplicationRecord
 
   enum status: [:pending, :packaged, :shipped]
 
+
+  def self.total_revenue
+    sum('unit_price * quantity')
+  end
+
   def invoice_dates
     invoice.created_at.strftime("%A, %B %d, %Y")
   end
