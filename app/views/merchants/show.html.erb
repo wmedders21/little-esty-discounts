@@ -4,7 +4,7 @@
 <br>
 <h3> Top 5 Customers</h3>
   <ol type="1">
-    <%  @top_five.each do |customer| %>
+    <%  @merchant.top_five.each do |customer| %>
     <li>
         <%= customer.first_name %>
         <%= customer.last_name %>

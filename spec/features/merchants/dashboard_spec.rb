@@ -242,7 +242,6 @@ RSpec.describe 'merchant dashboard page' do
 
 
       visit "/merchants/#{merchant.id}/dashboard"
-      save_and_open_page
       find("ol#ready_to_ship li:nth-child(1)").should have_content("Grenade")
       find("ol#ready_to_ship li:nth-child(2)").should have_content("Beyblade")
       find("ol#ready_to_ship li:nth-child(3)").should have_content("Butter")
