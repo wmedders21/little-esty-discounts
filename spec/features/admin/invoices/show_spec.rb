@@ -27,7 +27,7 @@ RSpec.describe "Admin Invoices Show" do
     InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 2, status: 0, unit_price: 215)
 
     visit "/admin/invoices/#{invoice_1.id}"
-
+    
     within("#item-#{item_1.id}") do
       expect(page).to have_content("pickle")
       expect(page).to have_content("6")
