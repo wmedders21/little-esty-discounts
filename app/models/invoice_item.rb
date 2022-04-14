@@ -8,4 +8,7 @@ class InvoiceItem < ApplicationRecord
     invoice.created_at.strftime("%A, %B %d, %Y")
   end
 
+  def self.ready_to_ship
+    where(status: "packaged").order('created_at DESC')
+  end
 end

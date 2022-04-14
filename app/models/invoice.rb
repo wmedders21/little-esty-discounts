@@ -17,5 +17,4 @@ class Invoice < ApplicationRecord
   def self.sorted_by_newest
     order(created_at: :desc)
   end
-
 end
