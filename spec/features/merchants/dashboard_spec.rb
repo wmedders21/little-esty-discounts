@@ -242,9 +242,21 @@ RSpec.describe 'merchant dashboard page' do
 
 
       visit "/merchants/#{merchant.id}/dashboard"
-      find("ol#ready_to_ship li:nth-child(1)").should have_content("Grenade")
-      find("ol#ready_to_ship li:nth-child(2)").should have_content("Beyblade")
-      find("ol#ready_to_ship li:nth-child(3)").should have_content("Butter")
-      find("ol#ready_to_ship li:nth-child(4)").should have_content("Toast")
+
+      within "#ready_to_ship li:nth-child(1)" do
+        expect(page).to have_content("Grenade")
+      end
+
+      within "#ready_to_ship li:nth-child(2)" do
+        expect(page).to have_content("Beyblade")
+      end
+
+      within "#ready_to_ship li:nth-child(3)" do
+        expect(page).to have_content("Butter")
+      end
+
+      within "#ready_to_ship li:nth-child(4)" do
+        expect(page).to have_content("Toast")
+      end
   end
 end
