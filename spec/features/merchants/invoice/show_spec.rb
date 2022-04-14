@@ -9,7 +9,7 @@ RSpec.describe 'the merchant invoice show page' do
         invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
 
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-
+        save_and_open_page
         expect(page).to have_content("#{invoice_1.id}")
         expect(page).to have_content("completed")
         expect(page).to have_content("Bob Benson")
