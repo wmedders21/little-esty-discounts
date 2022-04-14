@@ -27,6 +27,10 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def invoice_dates
+    invoice.created_at.strftime("%A, %B %d, %Y")
+  end
+
   def distinct_invoices
     invoices.distinct
   end
