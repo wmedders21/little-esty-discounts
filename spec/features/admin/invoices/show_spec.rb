@@ -14,4 +14,34 @@ RSpec.describe "Admin Invoices Show" do
     expect(page).to have_content('Friday, July 01, 2022')
     expect(page).to have_no_content('Saturday, April 02, 2022')
   end
+
+  it 'displays all the items and item info' do
+    walmart = Merchant.create!(name: "Wal-Mart")
+    bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+    item_1 = walmart.items.create!(name: "pickle", description: "sour cucumber", unit_price: 300)
+    item_2 = walmart.items.create!(name: "eraser", description: "rubber bit", unit_price: 200)
+
+    invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+
+    InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 6, status: 1, unit_price: 295)
+    InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 2, status: 0, unit_price: 215)
+
+    visit "/admin/invoices/#{invoice_1.id}"
+
+    within("#item-#{item_1.id}") do
+      expect(page).to have_content("pickle")
+      expect(page).to have_content("6")
+      expect(page).to have_content("$2.95")
+      expect(page).to have_content("packaged")
+      expect(page).to have_no_content("eraser")
+    end
+
+    within("#item-#{item_2.id}") do
+      expect(page).to have_content("eraser")
+      expect(page).to have_content("2")
+      expect(page).to have_content("$2.15")
+      expect(page).to have_content("pending")
+      expect(page).to have_no_content("pickle")
+    end
+  end
 end
