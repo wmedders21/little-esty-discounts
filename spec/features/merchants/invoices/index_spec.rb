@@ -36,11 +36,11 @@ RSpec.describe 'merchant invoices index page' do
         visit "/merchants/#{merchant_1.id}/invoices"
 
         expect(page).to have_content(invoice_1.status)
-        expect(page).to have_link(invoice_1.id)
+        expect(page).to have_link("#{invoice_1.id}")
         expect(page).to have_content(invoice_2.status)
-        expect(page).to have_link(invoice_2.id)
-        
-        expect(page).not_to have_link(invoice_3.id)
+        expect(page).to have_link("#{invoice_2.id}")
+
+        expect(page).not_to have_link("#{invoice_3.id}")
 
         within "#invoice-#{invoice_2.id}" do
           click_link "#{invoice_2.id}"
