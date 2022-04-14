@@ -1,4 +1,4 @@
-class Merchants::ItemsController < ApplicationController
+class ItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:id])
   end
@@ -14,7 +14,7 @@ class Merchants::ItemsController < ApplicationController
   def create
     merchant = Merchant.find(params[:id])
     item = merchant.items.create(item_params)
-    redirect_to merchants_path
+    redirect_to "/merchants/#{merchant.id}/items"
   end
 
   def edit
