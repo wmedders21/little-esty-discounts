@@ -90,20 +90,4 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.sorted_by_newest.take(5)).to eq([invoice_11, invoice_10, invoice_9, invoice_8, invoice_7])
     end
   end
-
-  describe 'instance methods' do
-    it '#total_revenue' do
-      walmart = Merchant.create!(name: "Wal-Mart")
-      bob = Customer.create!(first_name: "Bob", last_name: "Benson")
-      item_1 = walmart.items.create!(name: "pickle", description: "sour cucumber", unit_price: 300)
-      item_2 = walmart.items.create!(name: "eraser", description: "rubber bit", unit_price: 200)
-
-      invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
-
-      InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_1.id, quantity: 6, status: 1, unit_price: 295)
-      InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 2, status: 0, unit_price: 215)
-
-      expect(invoice_1.total_revenue).to eq(2200)
-    end
-  end
 end
