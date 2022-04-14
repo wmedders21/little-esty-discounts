@@ -5,6 +5,12 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  def top_five
+    customers.joins(:transactions)
+    .group(:id)
+    .where('transactions.result = ?', 'success')
+    .order('count(customers.id) desc')
+  end
 
   def items_and_invoice_items
     items.joins(:invoice_items)
@@ -21,12 +27,11 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
-
   def invoice_dates
     invoice.created_at.strftime("%A, %B %d, %Y")
   end
 
-  # def invoice_dates
-  #   invoice.created_at.strftime("%A, %B %d, %Y")
-  # end
+  def distinct_invoices
+    invoices.distinct
+  end
 end
