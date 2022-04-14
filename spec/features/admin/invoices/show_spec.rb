@@ -58,6 +58,6 @@ RSpec.describe "Admin Invoices Show" do
 
     visit "/admin/invoices/#{invoice_1.id}"
 
-    expect(page).to have_content("$22.00")  
+    expect(page).to have_content("$22.00")
   end
 end
