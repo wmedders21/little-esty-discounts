@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
+  enum status: [:disabled, :enabled]
+
   def top_five
     customers.joins(:transactions)
     .group(:id)
