@@ -11,11 +11,17 @@ class Item < ApplicationRecord
     "%.2f" % (unit_price.to_f/100).truncate(2)
   end
 
+
+  def self.items_by_merchant(merchant_id)
+    joins(:invoice_items).where(merchant_id: merchant_id)
+  end
+
   def top_selling_date
     invoices.select('invoices.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
             .group('invoices.id')
             .order('revenue desc')
             .first
             .created_at
+
   end
 end

@@ -5,3 +5,14 @@ Invoice Status: <%= @invoice.status %>
 Created At: <%= @invoice.dates %>
 <br>
 Customer Name: <%= @invoice.full_name %>
+<br>
+<% @invoice.invoice_items.each do |invoice_item|%>
+  <% if invoice_item.belongs_to_merchant(params[:merchant_id]) %>
+    <h3>Invoice Item <%= invoice_item.id%></h3>
+    Quantity: <%=invoice_item.quantity %>
+    <br>
+    Unit Price: <%=invoice_item.unit_price%>
+    <br>
+    Status: <%=invoice_item.status%>
+  <% end %>
+<% end %>
