@@ -4,7 +4,7 @@
   <div id="popular_item-<%= item.id %>">
     <h3><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></h3>
     <p>Total Revenue: $<%= "%.2f" % (item.total_revenue.to_f/100).truncate(2) %></p>
-    <p><%= item.date.strftime("Top Selling Date: %Y-%m-%d") %></p>
+    <p><%= item.top_selling_date %></p>
   </div>
   <% end %>
 </div>

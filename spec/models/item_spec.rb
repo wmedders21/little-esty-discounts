@@ -83,11 +83,11 @@ RSpec.describe Item, type: :model do
         transaction_2 = invoice_2.transactions.create!(credit_card_number: 0000111122223333, result: "failed")
         transaction_3 = invoice_3.transactions.create!(credit_card_number: 0000111122223333, result: "success")
 
-        expect(item_8.top_selling_date).to eq("2012-07-05")
-        expect(item_1.top_selling_date).to eq("2012-04-25")
-        expect(item_8.top_selling_date).to eq("2012-07-05")
-        expect(item_8.top_selling_date).to eq("2012-04-25")
-        expect(item_8.top_selling_date).to eq("2012-07-05")
+        expect(item_8.top_selling_date).to eq(date_2)
+        expect(item_1.top_selling_date).to eq(date_1)
+        expect(item_4.top_selling_date).to eq(date_2)
+        expect(item_3.top_selling_date).to eq(date_1)
+        expect(item_6.top_selling_date).to eq(date_2)
       end
     end
   end
