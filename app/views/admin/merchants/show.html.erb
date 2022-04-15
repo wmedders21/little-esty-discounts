@@ -6,3 +6,7 @@
 
   <p id="update"> <%= link_to "Update Merchant Information", "/admin/merchants/#{@merchant.id}/edit" %> </p>
 </div>
+
+<% flash.each do |type, message| %>
+  <p><%= message %></p>
+<% end %>

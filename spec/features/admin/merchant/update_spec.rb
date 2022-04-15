@@ -34,5 +34,6 @@ RSpec.describe 'the Admin Merchant Update page' do
     expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
 
     expect(page).to have_content("Not Mollys Anymore")
+    expect(page).to have_content("Information Successfully Updated")
   end
 end
