@@ -35,7 +35,4 @@ RSpec.describe 'the Admin Merchant Update page' do
 
     expect(page).to have_content("Not Mollys Anymore")
   end
-
-  it 'displays a flash message showing success'
-
 end
