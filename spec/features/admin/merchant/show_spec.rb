@@ -23,7 +23,7 @@ RSpec.describe "Admin Merchants Show" do
       expect(page).to have_content("Merchant Show - Admin")
     end
 
-    within("#text-field") do
+    within(".merchant-info") do
       expect(page).to have_content("Name: ")
       expect(page).to have_content("Mollys")
       expect(page).to_not have_content("Berrys")
