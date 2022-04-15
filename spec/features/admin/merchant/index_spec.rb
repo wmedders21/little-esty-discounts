@@ -12,9 +12,9 @@ RSpec.describe "Admin Merchants Index" do
   end
 
   it 'displays all of the merchants' do
-    @merchant_1 = Merchant.create!(name: "Mollys")
-    @merchant_2 = Merchant.create!(name: "Berrys")
-    @merchant_3 = Merchant.create!(name: "Jimmys")
+    merchant_1 = Merchant.create!(name: "Mollys")
+    merchant_2 = Merchant.create!(name: "Berrys")
+    merchant_3 = Merchant.create!(name: "Jimmys")
 
     visit '/admin/merchants'
 
@@ -24,6 +24,33 @@ RSpec.describe "Admin Merchants Index" do
       expect(page).to have_content('Jimmys')
       expect(page).to_not have_content('Willys')
     end
+
+  it 'contains a button to enable or disable' do
+    merchant_1 = Merchant.create!(name: "Mollys")
+
+    visit '/admin/merchants'
+
+    within(".index") do
+      expect(page).to have_button("Enable")
+      expect(page).to have_button("Disable")
+      expect(page).to_not have_button("LoremIpsum")
+    end
+  end
+
+  it 'updates a merchant between enable/disable' do
+    merchant_1 = Merchant.create!(name: "Mollys")
+
+    visit '/admin/merchants'
+
+    click_button: "Enable"
+
+    expect(current_path).to eq('/admin/merchants')
+
+    expect(merchant_1.status).to eq("Enabled")
+
+    click_button: "Disable"
+
+    expect(merchant_1.status).to eq("Disabled")
   end
 
   it 'loads into test db' do
