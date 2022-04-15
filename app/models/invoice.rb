@@ -18,6 +18,10 @@ class Invoice < ApplicationRecord
     order(created_at: :desc)
   end
 
+  def self.belongs_to_merchant?
+
+  end
+
   def dates
     created_at.strftime("%A, %B %d, %Y")
   end
