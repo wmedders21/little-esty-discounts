@@ -29,4 +29,12 @@ RSpec.describe "Admin Merchants Show" do
       expect(page).to_not have_content("Berrys")
     end
   end
+
+  it 'has a link to update the merchant information' do
+    visit "/admin/merchants/#{@merchant_1.id}"
+
+    within("#update") do
+      expect(page).to have_link("Update Merchant Information")
+    end
+  end
 end
