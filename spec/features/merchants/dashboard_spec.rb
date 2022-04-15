@@ -211,7 +211,7 @@ RSpec.describe 'merchant dashboard page' do
       invoice_item_6 = item.invoice_items.create(invoice_id:invoice_6.id, quantity:3, unit_price: 3000)
 
       visit "/merchants/#{merchant.id}/dashboard"
-      save_and_open_page
+      
       click_link("#{invoice_item_1.invoice_id}")
       expect(page).to have_current_path("/merchants/#{merchant.id}/invoices/#{invoice_item_1.invoice_id}")
   end
