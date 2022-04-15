@@ -17,7 +17,7 @@ class Admin::MerchantsController < ApplicationController
       redirect_to admin_merchants_path
     elsif merchant.update(merchant_params)
       redirect_to admin_merchant_path
-      flash[:success] = "Merchant Successfully Updated"
+      flash[:success] = "Information Successfully Updated"
     end
   end
 

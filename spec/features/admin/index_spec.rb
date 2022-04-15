@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Admin Dashboard" do
   it 'displays a header indicating that user is on the admin dashboard' do
     visit '/admin'
-    # save_and_open_page
+
     within(".header") do
       expect(page).to have_content("Admin Dashboard")
     end
@@ -164,6 +164,7 @@ RSpec.describe "Admin Dashboard" do
     InvoiceItem.create!(invoice_id: invoice_11.id, item_id: item_11.id, quantity: 1, status: 0)
 
     visit '/admin'
+
     expect("#{invoice_11.id}").to appear_before("#{invoice_10.id}")
     expect("#{invoice_10.id}").to appear_before("#{invoice_9.id}")
     expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
