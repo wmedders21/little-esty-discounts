@@ -7,7 +7,7 @@ Created At: <%= @invoice.dates %>
 Customer Name: <%= @invoice.full_name %>
 <br>
 <% @invoice.invoice_items.each do |invoice_item|%>
-  <% if invoice_item.item.merchant_id == params[:merchant_id].to_i %>
+  <% if invoice_item.belongs_to_merchant(params[:merchant_id]) %>
     <h3>Invoice Item <%= invoice_item.id%></h3>
     Quantity: <%=invoice_item.quantity %>
     <br>

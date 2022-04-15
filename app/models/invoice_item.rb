@@ -17,6 +17,14 @@ class InvoiceItem < ApplicationRecord
     where(status: "packaged").order('created_at DESC')
   end
 
+  def belongs_to_merchant(merchant_id)
+    if item.merchant_id == merchant_id.to_i
+      return true
+    else
+      return false
+    end
+  end
+
   def self.merchant_invoice_items
     where(status: "packaged").order('created_at DESC')
   end

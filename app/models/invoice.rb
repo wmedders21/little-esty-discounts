@@ -19,7 +19,7 @@ class Invoice < ApplicationRecord
   end
 
   def self.belongs_to_merchant?
-
+    item.merchant_id == params[:merchant_id].to_i
   end
 
   def dates
