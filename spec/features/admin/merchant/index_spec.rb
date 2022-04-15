@@ -12,28 +12,43 @@ RSpec.describe "Admin Merchants Index" do
   end
 
   it 'displays all of the merchants' do
-    merchant_1 = Merchant.create!(name: "Mollys")
-    merchant_2 = Merchant.create!(name: "Berrys")
-    merchant_3 = Merchant.create!(name: "Jimmys")
+    merchant_1 = Merchant.create!(name: "Mollys", status: 1)
+    merchant_2 = Merchant.create!(name: "Berrys", status: 1)
+    merchant_3 = Merchant.create!(name: "Jimmys", status: 0)
 
     visit '/admin/merchants'
 
-    within(".index") do
+    within("#enabled-merchants") do
       expect(page).to have_content('Mollys')
       expect(page).to have_content('Berrys')
+      expect(page).to_not have_content('Jimmys')
+    end
+
+    within("#disabled-merchants") do
       expect(page).to have_content('Jimmys')
-      expect(page).to_not have_content('Willys')
+      expect(page).to_not have_content('Mollys')
+      expect(page).to_not have_content('Berrys')
     end
   end
 
   it 'contains a button to enable or disable' do
-    merchant_1 = Merchant.create!(name: "Mollys")
+    merchant_1 = Merchant.create!(name: "Mollys", status: 1)
+    merchant_2 = Merchant.create!(name: "Berrys", status: 1)
+    merchant_3 = Merchant.create!(name: "Jimmys", status: 0)
 
     visit '/admin/merchants'
 
-    expect(page).to have_button("Enable")
-    expect(page).to have_button("Disable")
-    expect(page).to_not have_button("LoremIpsum")
+    within("#merchant-#{merchant_1.id}") do
+      expect(page).to have_button("Disable")
+    end
+
+    within("#merchant-#{merchant_2.id}") do
+      expect(page).to have_button("Disable")
+    end
+
+    within("#merchant-#{merchant_3.id}") do
+      expect(page).to have_button("Enable")
+    end
   end
 
   it 'updates a merchant between enable/disable' do

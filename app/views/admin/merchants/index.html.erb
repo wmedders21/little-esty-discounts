@@ -2,7 +2,7 @@
     <h1>Merchant Index - Admin</h1>
   </header>
 
-<div id="enabled_merchants">
+<div id="enabled-merchants">
   <h1>Enabled Merchants</h1>
   <% @merchants.enabled.each do |merchant| %>
     <div id="merchant-<%= merchant.id %>">
@@ -12,7 +12,7 @@
   <% end %>
 </div>
 
-<div id="disabled_merchants">
+<div id="disabled-merchants">
   <h1>Disabled Merchants</h1>
   <% @merchants.disabled.each do |merchant| %>
     <div id="merchant-<%= merchant.id %>">
