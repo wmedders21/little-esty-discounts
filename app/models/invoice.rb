@@ -17,4 +17,16 @@ class Invoice < ApplicationRecord
   def self.sorted_by_newest
     order(created_at: :desc)
   end
+
+  def self.belongs_to_merchant?
+    item.merchant_id == params[:merchant_id].to_i
+  end
+
+  def dates
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def full_name
+    customer.first_name + " " +  customer.last_name
+  end
 end
