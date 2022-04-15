@@ -17,10 +17,5 @@ class Item < ApplicationRecord
             .order('revenue desc')
             .first
             .created_at
-
-    # SELECT invoices.created_at FROM record
-    #   INNER JOIN invoice_items ON record.id = invoice_items.item_id
-    #   INNER JOIN invoices ON invoices.id = invoice_items.invoice_id
-    #  ORDER BY invoice_items.quantity * invoice_items.unit_price DESC LIMIT 1) AS date'
   end
 end
