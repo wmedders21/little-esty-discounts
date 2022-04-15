@@ -10,7 +10,7 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:id])
     merchant.update(merchant_params)
-    redirect_to "/admin/merchants/#{merchant.id}"
+    redirect_to admin_merchant_path
   end
 
   def edit
