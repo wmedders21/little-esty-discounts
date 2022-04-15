@@ -25,7 +25,7 @@ RSpec.describe 'the merchant invoice show page' do
         invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
         invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-
+        save_and_open_page
         expect(page).to have_content("45")
         expect(page).to have_content("1000")
   end
