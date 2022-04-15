@@ -191,34 +191,34 @@ RSpec.describe 'merchant items index page' do
         merchant_1 = Merchant.create!(name: "Jim's Rare Guitars")
         item_1 = merchant_1.items.create!(name: "1959 Gibson Les Paul",
                                         description: "Tobacco Burst Finish, Rosewood Fingerboard",
-                                        unit_price: 25000000)
+                                        unit_price: 25000)
         item_2 = merchant_1.items.create!(name: "1954 Fender Stratocaster",
                                         description: "Seafoam Green Finish, Maple Fingerboard",
-                                        unit_price: 10000000)
+                                        unit_price: 10000)
         item_3 = merchant_1.items.create!(name: "1968 Gibson SG",
                                         description: "Cherry Red Finish, Rosewood Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 400)
         item_4 = merchant_1.items.create!(name: "1984 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 600000)
+                                        unit_price: 600)
         item_5 = merchant_1.items.create!(name: "1991 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 900000)
+                                        unit_price: 900)
         item_6 = merchant_1.items.create!(name: "1993 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 700000)
+                                        unit_price: 700)
         item_7 = merchant_1.items.create!(name: "2004 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 200000)
+                                        unit_price: 200)
         item_8 = merchant_1.items.create!(name: "1997 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 100)
         item_9 = merchant_1.items.create!(name: "1996 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 100)
         item_10 = merchant_1.items.create!(name: "1975 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 400)
         customer_1 = Customer.create!(first_name: "Guthrie", last_name: "Govan")
 
         invoice_1 = customer_1.invoices.create!(status: 1)
@@ -249,23 +249,23 @@ RSpec.describe 'merchant items index page' do
         end
 
         within "#popular_item-#{item_8.id}" do
-          expect(page).to have_content("Total Revenue: $10010000.00")
+          expect(page).to have_content("Total Revenue: $10010.00")
         end
 
         within "#popular_item-#{item_1.id}" do
-          expect(page).to have_content("Total Revenue: $250000.00")
+          expect(page).to have_content("Total Revenue: $250.00")
         end
 
         within "#popular_item-#{item_4.id}" do
-          expect(page).to have_content("Total Revenue: $186000.00")
+          expect(page).to have_content("Total Revenue: $186.00")
         end
 
         within "#popular_item-#{item_3.id}" do
-          expect(page).to have_content("Total Revenue: $140000.00")
+          expect(page).to have_content("Total Revenue: $140.00")
         end
 
         within "#popular_item-#{item_6.id}" do
-          expect(page).to have_content("Total Revenue: $119000.00")
+          expect(page).to have_content("Total Revenue: $119.00")
         end
 
         within "#popular_item-#{item_3.id}" do
@@ -279,34 +279,34 @@ RSpec.describe 'merchant items index page' do
         merchant_1 = Merchant.create!(name: "Jim's Rare Guitars")
         item_1 = merchant_1.items.create!(name: "1959 Gibson Les Paul",
                                         description: "Tobacco Burst Finish, Rosewood Fingerboard",
-                                        unit_price: 25000000)
+                                        unit_price: 25000)
         item_2 = merchant_1.items.create!(name: "1954 Fender Stratocaster",
                                         description: "Seafoam Green Finish, Maple Fingerboard",
-                                        unit_price: 10000000)
+                                        unit_price: 10000)
         item_3 = merchant_1.items.create!(name: "1968 Gibson SG",
                                         description: "Cherry Red Finish, Rosewood Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 400)
         item_4 = merchant_1.items.create!(name: "1984 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 600000)
+                                        unit_price: 600)
         item_5 = merchant_1.items.create!(name: "1991 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 900000)
+                                        unit_price: 900)
         item_6 = merchant_1.items.create!(name: "1993 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 700000)
+                                        unit_price: 700)
         item_7 = merchant_1.items.create!(name: "2004 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 200000)
+                                        unit_price: 200)
         item_8 = merchant_1.items.create!(name: "1997 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 100)
         item_9 = merchant_1.items.create!(name: "1996 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 100000)
+                                        unit_price: 100)
         item_10 = merchant_1.items.create!(name: "1975 Gibson Les Paul",
                                         description: "Sunburst Finish, Maple Fingerboard",
-                                        unit_price: 400000)
+                                        unit_price: 400)
         customer_1 = Customer.create!(first_name: "Guthrie", last_name: "Govan")
         date_1 = Time.parse("2012-04-25")
         date_2 = Time.parse("2012-07-05")

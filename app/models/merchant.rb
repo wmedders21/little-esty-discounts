@@ -20,7 +20,11 @@ class Merchant < ApplicationRecord
 
   def most_popular_items
     items.joins(:transactions)
-    .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue,
+             (SELECT invoices.created_at FROM record
+               INNER JOIN invoice_items ON record.id = invoice_items.item_id
+               INNER JOIN invoices ON invoices.id = invoice_items.invoice_id
+              ORDER BY invoice_items.quantity * invoice_items.unit_price DESC LIMIT 1) AS date')
     .where("transactions.result = 'success' AND invoices.status = 1")
     .group('items.id')
     .order('total_revenue desc')
