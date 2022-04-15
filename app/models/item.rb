@@ -10,4 +10,12 @@ class Item < ApplicationRecord
   def unit_price_to_currency
     "%.2f" % (unit_price.to_f/100).truncate(2)
   end
+
+  def top_selling_date
+    invoices.select('invoices.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+            .group('invoices.id')
+            .order('revenue desc')
+            .first
+            .created_at
+  end
 end
