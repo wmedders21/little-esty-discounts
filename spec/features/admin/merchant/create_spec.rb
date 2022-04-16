@@ -16,8 +16,7 @@ RSpec.describe 'the admin merchant create page' do
 
     click_link "Create New Merchant"
     fill_in :name, with: "Bobby Sues"
-
-    click 'Submit'
+    click_button 'Submit'
 
     expect(current_path).to eq(admin_merchants_path)
     expect(page).to have_content("Bobby Sues")
