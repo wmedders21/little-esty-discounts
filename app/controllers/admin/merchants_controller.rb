@@ -26,7 +26,8 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.new(params[merchant_params])
+    merchant = Merchant.new(merchant_params)
+    merchant.save
     redirect_to admin_merchants_path
   end
 
