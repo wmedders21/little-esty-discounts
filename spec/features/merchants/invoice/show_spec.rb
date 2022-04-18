@@ -10,7 +10,7 @@ RSpec.describe 'the merchant invoice show page' do
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
         expect(page).to have_content("#{invoice_1.id}")
         expect(page).to have_content("completed")
-        expect(page).to have_content("Toast ")
+        expect(page).to have_content("Bob Benson")
         expect(page).to have_content('Tuesday, April 05, 2022')
 
   end
@@ -48,28 +48,5 @@ RSpec.describe 'the merchant invoice show page' do
         expect(page).to_not have_content("222")
         expect(page).to_not have_content("3499")
         expect(page).to_not have_content("Polearm")
-
-  end
-   it 'the total revenue from the invoice' do
-        merchant = Merchant.create(name: "Braum's")
-        merchant2 = Merchant.create(name: "Target")
-
-        item1 = merchant.items.create(name: "Toast", description: "Let it rip!", unit_price: 1000)
-        item2 = merchant.items.create(name: "Polearm", description: "Let it rip!", unit_price: 1000)
-
-        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
-        dave = Customer.create!(first_name: "Dave", last_name: "Fogherty")
-
-        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
-        invoice_2 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
-
-        invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
-        invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
-        visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-        save_and_open_page
-        expect(page).to_not have_content("222")
-        expect(page).to_not have_content("3499")
-        expect(page).to_not have_content("Dave")
-        expect(page).to_not have_content("Fogherty")
   end
 end
