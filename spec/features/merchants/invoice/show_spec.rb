@@ -79,15 +79,15 @@ RSpec.describe 'the merchant invoice show page' do
       it "i see that each invoice item status is a select field
           and i see that the invoice item's current status is selected" do
 
-        within "#invoice_item-#{@invoice_item_1.id}" do
+        within "#item-#{@invoice_item_1.id}" do
           expect(page).to have_select(:status, selected: 'Pending')
         end
 
-        within "#invoice_item-#{@invoice_item_2.id}" do
+        within "#item-#{@invoice_item_2.id}" do
           expect(page).to have_select(:status, selected: 'Shipped')
         end
 
-        within "#invoice_item-#{@invoice_item_3.id}" do
+        within "#item-#{@invoice_item_4.id}" do
           expect(page).to have_select(:status, selected: 'Packaged')
         end
       end
@@ -97,23 +97,23 @@ RSpec.describe 'the merchant invoice show page' do
           update item status, which, when clicked, takes me back to the
           merchant invoice show page and i see that my item's status
           has been updated" do
-
-        within "#invoice_item-#{@invoice_item_3.id}" do
+        
+        within "#item-#{@invoice_item_4.id}" do
           select 'Shipped', :from => :status
-          click_button("Update Invoice Status")
+          click_button("Update Item Status")
         end
 
         expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
 
-        within "#invoice_item-#{@invoice_item_3.id}" do
+        within "#item-#{@invoice_item_4.id}" do
           expect(page).to have_select(:status, selected: 'Shipped')
         end
 
-        within "#invoice_item-#{@invoice_item_1.id}" do
+        within "#item-#{@invoice_item_1.id}" do
           expect(page).to have_select(:status, selected: 'Pending')
         end
 
-        within "#invoice_item-#{@invoice_item_2.id}" do
+        within "#item-#{@invoice_item_2.id}" do
           expect(page).to have_select(:status, selected: 'Shipped')
         end
       end

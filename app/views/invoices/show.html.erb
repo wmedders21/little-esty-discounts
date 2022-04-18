@@ -7,12 +7,18 @@ Created At: <%= @invoice.dates %>
 Customer Name: <%= @invoice.full_name %>
 <br>
 <% @invoice.invoice_items.each do |invoice_item|%>
-  <% if invoice_item.belongs_to_merchant(params[:merchant_id]) %>
-    <h3>Invoice Item <%= invoice_item.id%></h3>
+<div id="item-<%= invoice_item.id %>">
+  <% if invoice_item.belongs_to_merchant(@merchant.id) %>
+    <h3>Invoice Item <%= invoice_item.id %></h3>
     Quantity: <%=invoice_item.quantity %>
     <br>
     Unit Price: <%=invoice_item.unit_price%>
     <br>
-    Status: <%=invoice_item.status%>
+    <%= form_with url: "/merchants/#{@merchant.id}/invoice_items/#{invoice_item.id}", method: :patch, local: true do |form| %>
+      <%= form.label "Status" %>
+      <%= form.select(:status, options_for_select([['Pending', :pending], ['Packaged', :packaged], ['Shipped', :shipped]], invoice_item.status)) %>
+      <%= form.submit "Update Item Status" %>
+    <% end %>
   <% end %>
+</div>
 <% end %>
