@@ -207,7 +207,7 @@ RSpec.describe "Admin Merchants Index" do
     transactions_12 = invoice_12.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
 
     visit '/admin/merchants'
-    save_and_open_page
+    
     within("#top-by-revenue") do
       click_link("Merchant 1")
     end
