@@ -45,4 +45,8 @@ class Merchant < ApplicationRecord
     .order('total_revenue desc')
     .limit(5)
   end
+
+  def total_revenue_to_dollars
+    "$" + (sprintf "%.2f",total_revenue.to_f/100).to_s
+  end
 end

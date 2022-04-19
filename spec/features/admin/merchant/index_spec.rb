@@ -136,10 +136,10 @@ RSpec.describe "Admin Merchants Index" do
     transactions_12 = invoice_12.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
 
     visit '/admin/merchants'
-
+    save_and_open_page
     expect(page).to have_content('Merchant 1 $1611.20')
     expect(page).to have_content('Merchant 2 $98.00')
-    expect(page).to have_content('Merchant 4 $45.20')
+    expect(page).to have_content('Merchant 4 $45.00')
     expect(page).to have_content('Merchant 5 $11.40')
     expect(page).to have_content('Merchant 3 $2.46')
   end

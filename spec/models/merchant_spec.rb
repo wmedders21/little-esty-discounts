@@ -106,7 +106,7 @@ RSpec.describe Merchant, type: :model do
   end
   describe 'class methods' do
     describe '.top_five_by_revenue' do
-      it "displays the top five merchants name and revenue" do
+      it "top five by revenue finds top five by revenue" do
           merchant1 = Merchant.create(name: "Merchant 1")
           merchant2 = Merchant.create(name: "Merchant 2")
           merchant3 = Merchant.create(name: "Merchant 3")
