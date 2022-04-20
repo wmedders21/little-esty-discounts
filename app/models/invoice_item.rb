@@ -28,12 +28,4 @@ class InvoiceItem < ApplicationRecord
       return false
     end
   end
-
-  def self.merchant_invoice_items
-    where(status: "packaged").order('created_at DESC')
-  end
-
-   def invoice_items_by_merchant
-     Item.joins(:invoice_items).where(merchant_id: params[:merchant_id])
-   end
 end
