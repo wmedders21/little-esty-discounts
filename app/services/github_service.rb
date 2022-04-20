@@ -4,6 +4,10 @@ class GithubService < BaseService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.name
+    get_url('https://api.github.com/repos/enalihai/little-esty-shop')[:name]
+  end
+
   def self.contributers
     get_url('https://api.github.com/repos/enalihai/little-esty-shop/contributors')
   end
