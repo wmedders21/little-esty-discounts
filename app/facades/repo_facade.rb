@@ -5,6 +5,7 @@ class RepoFacade
     json = Hash.new
     json[:name] = GithubService.name
     json[:contributers] = GithubService.contributers_with_commits
+    json[:merges] = GithubService.merges
     Repo.new(json)
   end
 

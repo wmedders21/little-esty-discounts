@@ -15,4 +15,8 @@ class GithubService < BaseService
   def self.contributers_with_commits
     contributers.map {|contributer| {name: contributer[:login], commits: contributer[:contributions]}}
   end
+
+  def self.merges
+    get_url('https://api.github.com/repos/enalihai/little-esty-shop/pulls?state=all')[0][:number]
+  end
 end
