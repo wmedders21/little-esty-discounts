@@ -25,3 +25,12 @@
     </div>
   <% end %>
 </div>
+
+<div id="top-by-revenue">
+  <h1>Top by Revenue</h1>
+  <% @merchants.top_five_by_revenue.each do |merchant| %>
+    <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    <%= merchant.total_revenue_to_dollars %>
+    <br>
+  <% end %>
+</div>
