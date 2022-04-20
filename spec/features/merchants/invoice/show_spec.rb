@@ -110,11 +110,7 @@ RSpec.describe 'the merchant invoice show page' do
         end
       end
 
-      it "when i click the select field, then i can select a new status
-          for the item, and next to the select field i see a button to
-          update item status, which, when clicked, takes me back to the
-          merchant invoice show page and i see that my item's status
-          has been updated" do
+      it "can update the item status", :vcr do
 
         within "#item-#{@invoice_item_4.id}" do
           select 'Shipped', :from => :status
