@@ -1,5 +1,5 @@
 class GithubService < BaseService
-  def get_url(url)
+  def self.get_url(url)
     response = HTTParty.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
