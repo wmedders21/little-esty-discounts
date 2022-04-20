@@ -205,10 +205,5 @@ RSpec.describe "Admin Merchants Index" do
     expect(page).to have_current_path("/admin/merchants/#{merchant1.id}")
   end
 
-  describe 'api' do
-    it 'displays the name of github repo somewhere' do
-      visit 'admin/merchants'
-      expect(page).to have_content("little-esty-shop")
-    end
-  end
+
 end
