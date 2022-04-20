@@ -65,16 +65,6 @@ RSpec.describe "Admin Merchants Index" do
     expect(page).to have_button("Disable")
   end
 
-  it 'loads into test db' do
-    Rake::Task['csv_fake:customers'].invoke
-    Rake::Task['csv_fake:merchants'].invoke
-    Rake::Task['csv_fake:invoices'].invoke
-    Rake::Task['csv_fake:items'].invoke
-    Rake::Task['csv_fake:transactions'].invoke
-    Rake::Task['csv_fake:invoice_items'].invoke
-    expect(Customer.all.length).to eq(40)
-  end
-
   it 'shows top five merchants' do
     merchant1 = Merchant.create(name: "Merchant 1")
     merchant2 = Merchant.create(name: "Merchant 2")
@@ -207,11 +197,18 @@ RSpec.describe "Admin Merchants Index" do
     transactions_12 = invoice_12.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
 
     visit '/admin/merchants'
-    
+
     within("#top-by-revenue") do
       click_link("Merchant 1")
     end
 
     expect(page).to have_current_path("/admin/merchants/#{merchant1.id}")
+  end
+
+  describe 'api' do
+    it 'displays the name of github repo somewhere' do
+      visit 'admin/merchants'
+      expect(page).to have_content("little-esty-shop")
+    end
   end
 end
