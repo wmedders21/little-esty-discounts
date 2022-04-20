@@ -19,7 +19,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 04:23:35 GMT
+      - Wed, 20 Apr 2022 20:28:27 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -50,7 +50,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650432097'
+      - '1650490085'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -58,15 +58,15 @@ http_interactions:
       Content-Length:
       - '277'
       X-Github-Request-Id:
-      - 19DF:90F2:11A89D:1C522B:625F8AC7
+      - 2FB3:0E4C:1801D5:384661:62606CEB
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 154.6.18.24. (But here''s the
+      string: '{"message":"API rate limit exceeded for 154.6.17.37. (But here''s the
         good news: Authenticated requests get a higher rate limit. Check out the documentation
         for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 04:23:35 GMT
+  recorded_at: Wed, 20 Apr 2022 20:28:27 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/enalihai/little-esty-shop
@@ -86,7 +86,7 @@ http_interactions:
       message: rate limit exceeded
     headers:
       Date:
-      - Wed, 20 Apr 2022 04:23:36 GMT
+      - Wed, 20 Apr 2022 20:28:27 GMT
       Server:
       - Varnish
       Strict-Transport-Security:
@@ -117,7 +117,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '0'
       X-Ratelimit-Reset:
-      - '1650432097'
+      - '1650490085'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
@@ -125,13 +125,13 @@ http_interactions:
       Content-Length:
       - '277'
       X-Github-Request-Id:
-      - 361F:55AE:C84AD:1F16B9:625F8AC8
+      - 0B1B:6AB8:2CDE86:78D21B:62606CEB
     body:
       encoding: UTF-8
-      string: '{"message":"API rate limit exceeded for 154.6.18.24. (But here''s the
+      string: '{"message":"API rate limit exceeded for 154.6.17.37. (But here''s the
         good news: Authenticated requests get a higher rate limit. Check out the documentation
         for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}
 
 '
-  recorded_at: Wed, 20 Apr 2022 04:23:36 GMT
+  recorded_at: Wed, 20 Apr 2022 20:28:27 GMT
 recorded_with: VCR 6.1.0
