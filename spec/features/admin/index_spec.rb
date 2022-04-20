@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Admin Dashboard" do
-  it 'displays a header indicating that user is on the admin dashboard' do
+  it 'displays a header indicating that user is on the admin dashboard', :vcr do
     visit '/admin'
 
     within(".header") do
@@ -9,7 +9,7 @@ RSpec.describe "Admin Dashboard" do
     end
   end
 
-  it 'displays link to admin merchant index' do
+  it 'displays link to admin merchant index', :vcr do
     visit '/admin'
     within(".link_bar") do
       expect(page).to have_link("Admin Merchants")
@@ -18,7 +18,7 @@ RSpec.describe "Admin Dashboard" do
     expect(current_path).to eq('/admin/merchants')
   end
 
-  it 'displays link to admin invoices index' do
+  it 'displays link to admin invoices index', :vcr do
     visit '/admin'
     within(".link_bar") do
       expect(page).to have_link("Admin Invoices")
@@ -27,7 +27,7 @@ RSpec.describe "Admin Dashboard" do
     expect(current_path).to eq('/admin/invoices')
   end
 
-  it 'displays the names of top 5 customers' do
+  it 'displays the names of top 5 customers', :vcr do
     bob = Customer.create!(first_name: "Bob", last_name: "Benson")
     nate = Customer.create!(first_name: "Nate", last_name: "Chaffee")
     barty = Customer.create!(first_name: "Barty", last_name: "Dasher")
@@ -76,7 +76,7 @@ RSpec.describe "Admin Dashboard" do
     end
   end
 
-  it 'displays the ids of incomplete invoices' do
+  it 'displays the ids of incomplete invoices', :vcr do
     walmart = Merchant.create!(name: "Wal-Mart")
     bob = Customer.create!(first_name: "Bob", last_name: "Benson")
     item_1 = walmart.items.create!(name: "pickle", description: "sour cucumber", unit_price: 300)
@@ -126,7 +126,7 @@ RSpec.describe "Admin Dashboard" do
     expect(current_path).to eq("/admin/invoices/#{invoice_1.id}")
   end
 
-  it 'the ids are sorted by least recent' do
+  it 'the ids are sorted by least recent', :vcr do
     walmart = Merchant.create!(name: "Wal-Mart")
     bob = Customer.create!(first_name: "Bob", last_name: "Benson")
     item_1 = walmart.items.create!(name: "pickle", description: "sour cucumber", unit_price: 300)

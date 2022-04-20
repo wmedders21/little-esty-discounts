@@ -1,2 +1,9 @@
-<h3>Github Info</h3>
-<%= @repo.name %><hr>
+<% if @repo.present? %>
+  <% if @repo.is_a?(Repo) %>
+    <h3>Github Info</h3>
+    <%= @repo.name %><hr>
+    <% @repo.contributers.each do |contributer| %>
+    <p><%= contributer[:name] %>: <%=contributer[:commits] %> commits</p>
+    <% end %>
+  <% end %>
+<% end %>

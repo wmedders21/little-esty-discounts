@@ -3,4 +3,12 @@ class GithubService < BaseService
     response = HTTParty.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.contributers
+    get_url('https://api.github.com/repos/enalihai/little-esty-shop/contributors')
+  end
+
+  def self.contributers_with_commits
+    contributers.map {|contributer| {name: contributer[:login], commits: contributer[:contributions]}}
+  end
 end

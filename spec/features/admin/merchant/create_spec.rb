@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'the admin merchant create page' do
-  it 'has a link to create new merchant on index page' do
+  it 'has a link to create new merchant on index page', :vcr do
     merchant_1 = Merchant.create!(name: "Mollys", status: 1)
 
     visit admin_merchants_path
@@ -9,7 +9,7 @@ RSpec.describe 'the admin merchant create page' do
     expect(page).to have_link("Create New Merchant")
   end
 
-  it 'has a form which can add merchant info' do
+  it 'has a form which can add merchant info', :vcr do
     merchant_1 = Merchant.create!(name: "Mollys", status: 1)
 
     visit admin_merchants_path
@@ -22,7 +22,7 @@ RSpec.describe 'the admin merchant create page' do
     expect(page).to have_content("Bobby Sues")
   end
 
-  it 'the default status for a new merchant is disabled' do
+  it 'the default status for a new merchant is disabled', :vcr do
     merchant_1 = Merchant.create!(name: "Mollys")
 
     expect(merchant_1.status).to eq('disabled')
