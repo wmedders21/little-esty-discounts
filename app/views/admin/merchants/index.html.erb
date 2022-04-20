@@ -31,6 +31,7 @@
   <% @merchants.top_five_by_revenue.each do |merchant| %>
     <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
     <%= merchant.total_revenue_to_dollars %>
+    <%= merchant.best_day.strftime("Best Selling Date: %Y-%m-%d") %>
     <br>
   <% end %>
 </div>
