@@ -7,14 +7,6 @@ class Merchant < ApplicationRecord
 
   enum status: [:disabled, :enabled]
 
-  # def top_five
-  #   customers.joins(:transactions)
-  #   .group(:id)
-  #   .where('transactions.result = ?', 'success')
-  #   .order('count(customers.id) desc')
-  #   .limit(5)
-  # end
-
   def most_popular_items
     items.joins(:transactions)
     .select('items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')

@@ -1,5 +1,12 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter "app/channels/application_cable/channel.rb"
+  add_filter "app/channels/application_cable/connection.rb"
+  add_filter "app/controllers/welcome_controller.rb"
+  add_filter "app/jobs/application_job.rb"
+  add_filter "app/mailers/application_mailer.rb"
+  add_filter "lib/tasks/csv_load.rake"
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
