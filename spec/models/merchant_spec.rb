@@ -102,6 +102,43 @@ RSpec.describe Merchant, type: :model do
           expect(merchant_1.distinct_invoices.length).to eq(2)
         end
       end
+
+      describe '.best_day' do
+        it 'can determine the invoice date with the highest revenue' do
+          date_1 = Time.parse("2016-07-25")
+          date_2 = Time.parse("2022-04-05")
+          date_3 = Time.parse("2018-09-01")
+          merchant1 = Merchant.create!(name: "Merchant 1")
+          merchant2 = Merchant.create!(name: "Merchant 2")
+          item1 = merchant1.items.create(name: "Apple", description: "Let it rip!", unit_price: 1500)
+          item2 = merchant2.items.create(name: "Coconut", description: "Let it rip!", unit_price: 700)
+          bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+          dave = Customer.create!(first_name: "Dave", last_name: "Fogherty")
+          invoice_1 = bob.invoices.create!(status: 1, created_at: date_1)
+          invoice_2 = bob.invoices.create!(status: 1, created_at: date_2)
+          invoice_3 = bob.invoices.create!(status: 1, created_at: date_2)
+          invoice_4 = bob.invoices.create!(status: 1, created_at: date_3)
+          invoice_5 = bob.invoices.create!(status: 1, created_at: date_3)
+          invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:21, unit_price: 1)
+          invoice_item_2 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:10, unit_price: 1)
+          invoice_item_3 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:13, unit_price: 1)
+          invoice_item_4 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:2, unit_price: 1)
+          invoice_item_5 = item1.invoice_items.create(invoice_id:invoice_2.id, quantity:1, unit_price: 1)
+          invoice_item_6 = item1.invoice_items.create(invoice_id:invoice_2.id, quantity:50, unit_price: 1)
+          invoice_item_7 = item1.invoice_items.create(invoice_id:invoice_2.id, quantity:1, unit_price: 1)
+          invoice_item_8 = item1.invoice_items.create(invoice_id:invoice_2.id, quantity:1, unit_price: 1)
+          invoice_item_9 = item1.invoice_items.create(invoice_id:invoice_2.id, quantity:1, unit_price: 1)
+          invoice_item_10 = item2.invoice_items.create(invoice_id:invoice_3.id, quantity:8, unit_price: 1)
+          invoice_item_11 = item2.invoice_items.create(invoice_id:invoice_3.id, quantity:150000, unit_price: 1)
+          invoice_item_12 = item2.invoice_items.create(invoice_id:invoice_3.id, quantity:1, unit_price: 1)
+          invoice_item_12 = item1.invoice_items.create(invoice_id:invoice_4.id, quantity:30, unit_price: 1)
+          invoice_item_12 = item1.invoice_items.create(invoice_id:invoice_5.id, quantity:30, unit_price: 1)
+          transactions_1 = invoice_1.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
+          transactions_2 = invoice_2.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
+          transactions_3 = invoice_3.transactions.create(credit_card_number: "*", credit_card_expiration_date: "*", result:"success" )
+          expect(merchant1.best_day).to eq(date_3)
+        end
+      end
     end
   end
   describe 'class methods' do

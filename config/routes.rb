@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/', to: 'welcome#index'
+
   resources :merchants do
     get '/items', to: 'merchant_items#index'
     post '/items', to: 'merchant_items#create'
