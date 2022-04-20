@@ -1,10 +1,10 @@
-class ItemsController < ApplicationController
+class MerchantItemsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
   def new
@@ -18,11 +18,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
   def update
-    item = Item.find(params[:id])
+    item = Item.find(params[:item_id])
     if params[:disable]
       item.update(status: 0)
       redirect_to "/merchants/#{item.merchant_id}/items"
