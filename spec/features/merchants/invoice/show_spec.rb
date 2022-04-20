@@ -68,4 +68,73 @@ RSpec.describe 'the merchant invoice show page' do
         expect(page).to have_content("267000")
 
   end
+
+  describe 'as a merchant' do
+    describe 'when i visit my merchant invoice show page' do
+      before :each do
+        @merchant_1 = Merchant.create!(name: "Jim's Rare Guitars")
+        @item_1 = @merchant_1.items.create!(name: "1959 Gibson Les Paul",
+                                        description: "Tobacco Burst Finish, Rosewood Fingerboard",
+                                        unit_price: 25000000)
+        @item_2 = @merchant_1.items.create!(name: "1954 Fender Stratocaster",
+                                        description: "Seafoam Green Finish, Maple Fingerboard",
+                                        unit_price: 10000000)
+        @item_3 = @merchant_1.items.create!(name: "1968 Gibson SG",
+                                        description: "Cherry Red Finish, Rosewood Fingerboard",
+                                        unit_price: 400000,
+                                        status: 1)
+        @customer = Customer.create!(first_name: "Steven", last_name: "Seagal")
+        @invoice_1 = @customer.invoices.create!(status: 1)
+        @invoice_2 = @customer.invoices.create!(status: 0)
+        @invoice_item_1 = @item_1.invoice_items.create!(invoice_id: @invoice_1.id, quantity:45, unit_price: 1000, status: 0)
+        @invoice_item_2 = @item_2.invoice_items.create!(invoice_id: @invoice_1.id, quantity:222, unit_price: 1000, status: 2)
+        @invoice_item_3 = @item_2.invoice_items.create!(invoice_id: @invoice_2.id, quantity:222, unit_price: 1000, status: 1)
+        @invoice_item_4 = @item_3.invoice_items.create!(invoice_id: @invoice_1.id, quantity:222, unit_price: 1000, status: 1)
+
+        visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
+      end
+
+      it "i see that each invoice item status is a select field
+          and i see that the invoice item's current status is selected" do
+
+        within "#item-#{@invoice_item_1.id}" do
+          expect(page).to have_select(:status, selected: 'Pending')
+        end
+
+        within "#item-#{@invoice_item_2.id}" do
+          expect(page).to have_select(:status, selected: 'Shipped')
+        end
+
+        within "#item-#{@invoice_item_4.id}" do
+          expect(page).to have_select(:status, selected: 'Packaged')
+        end
+      end
+
+      it "when i click the select field, then i can select a new status
+          for the item, and next to the select field i see a button to
+          update item status, which, when clicked, takes me back to the
+          merchant invoice show page and i see that my item's status
+          has been updated" do
+        
+        within "#item-#{@invoice_item_4.id}" do
+          select 'Shipped', :from => :status
+          click_button("Update Item Status")
+        end
+
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+
+        within "#item-#{@invoice_item_4.id}" do
+          expect(page).to have_select(:status, selected: 'Shipped')
+        end
+
+        within "#item-#{@invoice_item_1.id}" do
+          expect(page).to have_select(:status, selected: 'Pending')
+        end
+
+        within "#item-#{@invoice_item_2.id}" do
+          expect(page).to have_select(:status, selected: 'Shipped')
+        end
+      end
+    end
+  end
 end
