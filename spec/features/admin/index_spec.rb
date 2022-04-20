@@ -27,6 +27,33 @@ RSpec.describe "Admin Dashboard" do
     expect(current_path).to eq('/admin/invoices')
   end
 
+  it 'allows the user to enable or disable merchants', :vcr do
+    merchant_1 = Merchant.create!(name: "Mollys", status: 0)
+    merchant_2 = Merchant.create!(name: "Berrys", status: 1)
+
+    visit "/admin/merchants"
+
+    within "#merchant-#{merchant_1.id}" do
+      click_button "Enable"
+    end
+
+    expect(current_path).to eq('/admin/merchants')
+
+    within "#merchant-#{merchant_1.id}" do
+      expect(page).to have_button("Disable")
+    end
+
+    within "#merchant-#{merchant_2.id}" do
+      click_button "Disable"
+    end
+
+    expect(current_path).to eq('/admin/merchants')
+
+    within "#merchant-#{merchant_2.id}" do
+      expect(page).to have_button("Enable")
+    end
+  end
+
   it 'displays the names of top 5 customers', :vcr do
     bob = Customer.create!(first_name: "Bob", last_name: "Benson")
     nate = Customer.create!(first_name: "Nate", last_name: "Chaffee")

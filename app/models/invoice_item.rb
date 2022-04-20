@@ -9,10 +9,6 @@ class InvoiceItem < ApplicationRecord
     sum('unit_price * quantity')
   end
 
-  def item_name
-    item.name
-  end
-
   def invoice_dates
     invoice.created_at.strftime("%A, %B %d, %Y")
   end
