@@ -260,4 +260,11 @@ RSpec.describe 'merchant dashboard page' do
         expect(page).to have_content("Toast")
       end
   end
+
+  it 'displays a link to view all discounts' do
+    merchant = Merchant.create(name: "Braum's")
+    visit "/merchants/#{merchant.id}/dashboard"
+    click_link "Bulk Discounts"
+    expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts")
+  end    
 end
