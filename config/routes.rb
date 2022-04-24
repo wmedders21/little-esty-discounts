@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/dashboard', to: 'merchants#show'
   get '/merchants/:id/bulk_discounts', to: 'merchant_bulk_discounts#index'
+  get '/merchants/:id/bulk_discounts/:id', to: 'merchant_bulk_discounts#show'
+
+
 
   resources :admin, only: [:index]
 
