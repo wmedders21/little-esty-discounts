@@ -42,7 +42,6 @@ RSpec.describe 'Bulk Discounts index' do
     click_link "Add Bulk Discount"
 
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
-
     fill_in :name, with: "Deal of the Week"
     fill_in :discount_percentage, with: "80"
     fill_in :quantity_threshold, with: "3"
@@ -76,5 +75,5 @@ RSpec.describe 'Bulk Discounts index' do
     expect(page).to have_no_content('Deal of the Week')
     expect(page).to have_no_content('80%')
     expect(page).to have_no_content('3')
-  end    
+  end
 end

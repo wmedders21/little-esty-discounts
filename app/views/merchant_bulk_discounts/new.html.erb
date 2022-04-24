@@ -1,4 +1,5 @@
-<%= form_with url: "", method: :post, local: true do |form| %>
+<h1>Create a New Bulk Discount</h1><hr>
+<%= form_with url: "/merchants/#{@merchant.id}/bulk_discounts/new", method: :post, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
 
