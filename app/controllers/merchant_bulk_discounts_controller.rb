@@ -14,7 +14,7 @@ class MerchantBulkDiscountsController < ApplicationController
   end
 
   def new
-    # binding.pry
+    @merchant = Merchant.find(params[:id])
   end
 
   def destroy
