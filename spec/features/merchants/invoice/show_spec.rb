@@ -25,7 +25,7 @@ RSpec.describe 'the merchant invoice show page' do
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
 
         expect(page).to have_content("45")
-        expect(page).to have_content("1000")
+        expect(page).to have_content("10.00")
   end
 
    it 'the quatity and price of item sold', :vcr do
@@ -65,7 +65,7 @@ RSpec.describe 'the merchant invoice show page' do
         invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
         visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
 
-        expect(page).to have_content("267000")
+        expect(page).to have_content("2670.00")
 
   end
 
