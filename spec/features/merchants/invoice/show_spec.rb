@@ -82,9 +82,9 @@ RSpec.describe 'the merchant invoice show page' do
     merchant.bulk_discounts.create!(name: 'Yeehaw Sale', discount_percentage: 30, quantity_threshold: 40)
 
     visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-
+save_and_open_page
     expect(page).to have_content("2670.00")
-    expect(page).to have_content("1425.00")    
+    expect(page).to have_content("1425.00")
   end
 
 

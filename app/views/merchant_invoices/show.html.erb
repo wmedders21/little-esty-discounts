@@ -1,5 +1,4 @@
-<h1>Invoice <%=@invoice.id%></h1>
-<br>
+<h1>Invoice <%=@invoice.id%></h1><hr>
 Invoice Status: <%= @invoice.status %>
 <br>
 Created At: <%= @invoice.dates %>
@@ -7,6 +6,8 @@ Created At: <%= @invoice.dates %>
 Customer Name: <%= @invoice.full_name %>
 <br>
 Total Revenue: $<%= '%.2f' % (@invoice.invoice_total_revenue.to_f.round(2) / 100) %>
+Total Discounted Revenue: $<%= '%.2f' % (@invoice.discounted_revenue.to_f.round(2) / 100) %><hr>
+
 <% @invoice.invoice_items.each do |invoice_item|%>
 <div id="item-<%= invoice_item.id %>">
   <% if invoice_item.belongs_to_merchant(@merchant.id) %>
