@@ -29,11 +29,11 @@ Rails.application.routes.draw do
   end
 
   get '/merchants/:id/dashboard', to: 'merchants#show'
-  
-  get '/merchants/:id/bulk_discounts', to: 'merchant_bulk_discounts#index'
-  get '/merchants/:id/bulk_discounts/:id', to: 'merchant_bulk_discounts#show'
-  get '/merchants/:id/bulk_discounts/new', to: 'merchant_bulk_discounts#new'
 
+  get '/merchants/:id/bulk_discounts', to: 'merchant_bulk_discounts#index'
+  get '/merchants/:id/bulk_discounts/new', to: 'merchant_bulk_discounts#new'
+  post '/merchants/:id/bulk_discounts/new', to: 'merchant_bulk_discounts#create'  
+  get '/merchants/:id/bulk_discounts/:id', to: 'merchant_bulk_discounts#show'
 
 
 
