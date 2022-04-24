@@ -1,0 +1,12 @@
+<%= form_with url: "", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :discount_percentage %>
+  <%= form.text_field :discount_percentage %>
+
+  <%= form.label :quantity_threshold %>
+  <%= form.number_field :quantity_threshold %>
+
+  <%= form.submit "Submit" %>
+<% end %>
