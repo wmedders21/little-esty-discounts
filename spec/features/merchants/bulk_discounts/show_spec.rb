@@ -12,6 +12,6 @@ RSpec.describe 'bulk discounts show' do
     expect(page).to have_content("25")
     expect(page).to have_content("5")
     expect(page).to have_no_content("10")
-    expect(page).to have_no_content("100")    
+    expect(page).to have_no_content("100")
   end
 end
