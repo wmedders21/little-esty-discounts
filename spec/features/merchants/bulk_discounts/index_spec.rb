@@ -31,4 +31,25 @@ RSpec.describe 'Bulk Discounts index' do
     click_link "Big Deal"
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{big_deal.id}")
   end
+
+  it 'has a link to create a new bulk discount' do
+    merchant_1 = Merchant.create(name: "Braum's")
+    visit "/merchants/#{merchant_1.id}/bulk_discounts"
+    expect(page).to have_no_content('Deal of the Week')
+    expect(page).to have_no_content('80%')
+    expect(page).to have_no_content('3')
+
+    click_link "Add Bulk Discount"
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+
+    fill_in :name, with: "Deal of the Week"
+    fill_in :discount_percentage, with: "80"
+    fill_in :quantity_threshold, with: "3"
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts")
+    expect(page).to have_content('Deal of the Week')
+    expect(page).to have_content('80%')
+    expect(page).to have_content('3')
+  end
 end
