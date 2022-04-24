@@ -11,6 +11,7 @@ RSpec.describe 'Bulk Discounts index' do
 
 
     visit "/merchants/#{merchant_1.id}/bulk_discounts"
+    
     expect(page).to have_content('Big Deal')
     expect(page).to have_content('25%')
     expect(page).to have_content('5')
