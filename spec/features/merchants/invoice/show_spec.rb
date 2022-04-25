@@ -98,23 +98,32 @@ RSpec.describe 'the merchant invoice show page' do
 
     invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
     invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+    invoice_item_3 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:1, unit_price: 1000)
 
     bd_1 = merchant.bulk_discounts.create!(name: 'Mega Liquidation', discount_percentage: 50, quantity_threshold: 100)
     bd_2 = merchant.bulk_discounts.create!(name: 'Yeehaw Sale', discount_percentage: 30, quantity_threshold: 40)
 
     visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-  
+
     within "#item-#{invoice_item_1.id}" do
       expect(page).to have_no_link("Mega Liquidation")
       click_link "Yeehaw Sale"
       expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bd_2.id}")
     end
+    
     visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
 
     within "#item-#{invoice_item_2.id}" do
       expect(page).to have_no_link("Yeehaw Sale")
       click_link "Mega Liquidation"
       expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bd_1.id}")
+    end
+
+    visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
+
+    within "#item-#{invoice_item_3.id}" do
+      expect(page).to have_no_link("Yeehaw Sale")
+      expect(page).to have_no_link("Mega Liquidation")
     end
   end
 
