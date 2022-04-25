@@ -5,7 +5,7 @@ Created At: <%= @invoice.dates %>
 <br>
 Customer Name: <%= @invoice.full_name %>
 <br>
-Total Revenue: $<%= '%.2f' % (@invoice.invoice_total_revenue.to_f.round(2) / 100) %>
+Total Revenue: $<%= '%.2f' % (@invoice.invoice_total_revenue.to_f.round(2) / 100) %><br>
 Total Discounted Revenue: $<%= '%.2f' % (@invoice.discounted_revenue.to_f.round(2) / 100) %><hr>
 
 <% @invoice.invoice_items.each do |invoice_item|%>
