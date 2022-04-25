@@ -27,4 +27,8 @@ class InvoiceItem < ApplicationRecord
       return false
     end
   end
+
+  def discount
+    binding.pry
+  end
 end
