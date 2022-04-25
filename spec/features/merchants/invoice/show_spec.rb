@@ -82,11 +82,41 @@ RSpec.describe 'the merchant invoice show page' do
     merchant.bulk_discounts.create!(name: 'Yeehaw Sale', discount_percentage: 30, quantity_threshold: 40)
 
     visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
-    
+
     expect(page).to have_content("2670.00")
     expect(page).to have_content("1425.00")
   end
 
+  it 'displays a link to the applied bulk discount next to each invoice item (if any)' do
+    merchant = Merchant.create(name: "Braum's")
+    item1 = merchant.items.create(name: "Toaster", description: "Four slots", unit_price: 1000)
+    item2 = merchant.items.create(name: "Poleaxe", description: "8 foot reach!", unit_price: 1000)
+
+    bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+
+    invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+
+    invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
+    invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+
+    bd_1 = merchant.bulk_discounts.create!(name: 'Mega Liquidation', discount_percentage: 50, quantity_threshold: 100)
+    bd_2 = merchant.bulk_discounts.create!(name: 'Yeehaw Sale', discount_percentage: 30, quantity_threshold: 40)
+
+    visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
+  
+    within "#item-#{invoice_item_1.id}" do
+      expect(page).to have_no_link("Mega Liquidation")
+      click_link "Yeehaw Sale"
+      expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bd_2.id}")
+    end
+    visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
+
+    within "#item-#{invoice_item_2.id}" do
+      expect(page).to have_no_link("Yeehaw Sale")
+      click_link "Mega Liquidation"
+      expect(current_path).to eq("/merchants/#{merchant.id}/bulk_discounts/#{bd_1.id}")
+    end
+  end
 
   describe 'as a merchant' do
     describe 'when i visit my merchant invoice show page' do

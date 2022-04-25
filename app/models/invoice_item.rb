@@ -29,8 +29,8 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discount
-    bulk_discounts.joins(:invoices)
-    .where('bulk_discounts.quantity_threshold <= invoice_items.quantity')
+    bulk_discounts
+    .where('? >= bulk_discounts.quantity_threshold', self.quantity)
     .order(quantity_threshold: :desc)
     .limit(1)
   end
