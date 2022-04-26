@@ -1,0 +1,6 @@
+<div class="header">
+  <h2>Upcoming Holidays</h2>
+  <% @holidays.next_three.each do |holiday| %>
+    <p><%= holiday.name %></p>
+  <% end %><hr>
+</div>
