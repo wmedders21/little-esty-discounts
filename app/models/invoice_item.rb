@@ -1,7 +1,7 @@
 class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item
-  has_many :merchants, through: :item
+  has_one :merchant, through: :item
   has_many :bulk_discounts, through: :item
 
 
@@ -31,7 +31,7 @@ class InvoiceItem < ApplicationRecord
   def discount
     bulk_discounts
     .where('? >= bulk_discounts.quantity_threshold', self.quantity)
-    .order(quantity_threshold: :desc)
+    .order(discount_percentage: :desc)
     .limit(1)
   end
 end
