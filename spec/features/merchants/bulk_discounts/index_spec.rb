@@ -76,4 +76,17 @@ RSpec.describe 'Bulk Discounts index' do
     expect(page).to have_no_content('80%')
     expect(page).to have_no_content('3')
   end
+
+  it 'displays a header showing the next three U.S. Holidays', :vcr do
+    merchant_1 = Merchant.create(name: "Braum's")
+
+    visit "/merchants/#{merchant_1.id}/bulk_discounts"
+
+    within '.header' do
+      expect(page).to have_content('Memorial Day')
+      expect(page).to have_content('Juneteenth')
+      expect(page).to have_content('Independence Day')
+      expect(page).to have_no_content('Christmas')
+    end
+  end
 end
