@@ -83,6 +83,7 @@ RSpec.describe 'Bulk Discounts index' do
     visit "/merchants/#{merchant_1.id}/bulk_discounts"
 
     within '.header' do
+      expect(page).to have_content('Upcoming Holidays')
       expect(page).to have_content('Memorial Day')
       expect(page).to have_content('Juneteenth')
       expect(page).to have_content('Independence Day')
