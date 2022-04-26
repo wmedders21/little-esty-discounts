@@ -1,3 +1,4 @@
+<%= render 'header' %>
 <h1> <%= @merchant.name %> Bulk Discounts</h1><hr>
 <%= link_to "Add Bulk Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %>
 <% @merchant.bulk_discounts.each do |discount| %>
