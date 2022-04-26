@@ -5,6 +5,6 @@ class NagerService
   end
 
   def get_year
-    Date.today.year
+    Time.now.year
   end
 end

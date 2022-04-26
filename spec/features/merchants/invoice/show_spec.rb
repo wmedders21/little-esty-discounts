@@ -52,14 +52,16 @@ RSpec.describe 'the merchant invoice show page' do
 
     item1 = merchant.items.create(name: "Toast", description: "Let it rip!", unit_price: 1000)
     item2 = merchant.items.create(name: "Polearm", description: "Let it rip!", unit_price: 1000)
+    item3 = merchant2.items.create(name: "Pencil", description: 'Number 2', unit_price: 100)
 
     bob = Customer.create!(first_name: "Bob", last_name: "Benson")
 
     invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
-    invoice_2 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
 
-    invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
-    invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+    invoice_item_1 = item1.invoice_items.create(invoice_id: invoice_1.id, quantity: 45, unit_price: 1000)
+    invoice_item_2 = item2.invoice_items.create(invoice_id: invoice_1.id, quantity: 222, unit_price: 1000)
+    invoice_item_3 = item3.invoice_items.create(invoice_id: invoice_1.id, quantity: 10, unit_price: 100)
+
     visit "/merchants/#{merchant.id}/invoices/#{invoice_1.id}"
 
     expect(page).to have_content("2670.00")

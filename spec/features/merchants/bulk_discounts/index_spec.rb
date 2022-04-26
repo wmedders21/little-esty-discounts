@@ -37,7 +37,6 @@ RSpec.describe 'Bulk Discounts index' do
     visit "/merchants/#{merchant_1.id}/bulk_discounts"
     expect(page).to have_no_content('Deal of the Week')
     expect(page).to have_no_content('80%')
-    expect(page).to have_no_content('3')
 
     click_link "Add Bulk Discount"
 
@@ -74,7 +73,6 @@ RSpec.describe 'Bulk Discounts index' do
 
     expect(page).to have_no_content('Deal of the Week')
     expect(page).to have_no_content('80%')
-    expect(page).to have_no_content('3')
   end
 
   it 'displays a header showing the next three U.S. Holidays' do
