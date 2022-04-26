@@ -12,7 +12,9 @@ Total Discounted Revenue: $<%= '%.2f' % (@invoice.discounted_revenue.to_f.round(
 <div id="item-<%= invoice_item.id %>">
   <% if invoice_item.belongs_to_merchant(@merchant.id) %>
     <h3>Invoice Item <%= invoice_item.id %></h3>
-
+    <% if invoice_item.discount.any? %>
+      <p>Applied Discount: <%= link_to "#{invoice_item.discount.first.name}", "/merchants/#{invoice_item.discount.first.merchant.id}/bulk_discounts/#{invoice_item.discount.first.id}"%></p>
+    <% end %>
     Quantity: <%=invoice_item.quantity %>
     <br>
     Unit Price: $<%= '%.2f' % (invoice_item.unit_price.to_f.round(2) / 100) %>

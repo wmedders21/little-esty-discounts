@@ -27,4 +27,11 @@ class InvoiceItem < ApplicationRecord
       return false
     end
   end
+
+  def discount
+    bulk_discounts
+    .where('? >= bulk_discounts.quantity_threshold', self.quantity)
+    .order(quantity_threshold: :desc)
+    .limit(1)
+  end
 end
