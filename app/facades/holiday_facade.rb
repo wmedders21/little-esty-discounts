@@ -9,8 +9,11 @@ class HolidayFacade
   end
 
   def next_three
-    # binding.pry
-    create_holidays.sort_by().take(3)
+    future = create_holidays.find_all { |holiday| holiday.date > Time.now }
+    if future.count < 3
+      future << create_holidays[0..2]
+    end
+     future.flatten.take(3)
   end
 
   def service
