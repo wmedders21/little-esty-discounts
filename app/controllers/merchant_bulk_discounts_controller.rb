@@ -9,9 +9,18 @@ class MerchantBulkDiscountsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.find(params[:id])
-    merchant.bulk_discounts.create!(discount_params)
-    redirect_to "/merchants/#{merchant.id}/bulk_discounts"
+    @merchant = Merchant.find(params[:id])
+    discount = @merchant.bulk_discounts.new(discount_params)
+    if params[:quantity_threshold].empty? || params[:discount_percentage].empty? || params[:name].empty?
+      flash[:notice] = "Please fill out all fields"
+      render :new
+    elsif params[:discount_percentage].to_i > 100 || params[:discount_percentage].to_i < 1
+      flash[:notice] = "Please enter a discount value between 1 and 100"
+      render :new
+    else
+      discount.save
+      redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
+    end
   end
 
   def new
