@@ -7,7 +7,7 @@
 - [Database Schema](#database-schema)
 
 ## Overview
-[Little Esty Discounts](https://little-esty-discount.herokuapp.com/) is a week-long solo extension of the group project [Little Esty Shop](https://github.com/turingschool-examples/little-esty-shop) assigned during Mod 2 the backend development program at Turing.
+[Little Esty Discounts](https://little-esty-discount.herokuapp.com/merchants/1) is a week-long solo extension of the group project [Little Esty Shop](https://github.com/turingschool-examples/little-esty-shop) assigned during Mod 2 the backend development program at Turing.
 This project adds a feature where merchants can create, update, and delete mulitple bulk discounts for items in their online store. There is also an API call to Nager Date used to display the next three upcoming US holidays our merchants bulk discounts index page. 
 
 ## Learning Goals
