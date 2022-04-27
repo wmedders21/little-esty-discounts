@@ -25,10 +25,26 @@ RSpec.describe 'bulk discounts show' do
 
     click_link "Edit Discount"
     fill_in :name, with: "Bigger Deal"
+    fill_in :discount_percentage, with: ""
+    fill_in :quantity_threshold, with: "3"
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{big_deal.id}/edit")
+    expect(page).to have_content("Please fill out all fields")
+
+    fill_in :name, with: "Bigger Deal"
+    fill_in :discount_percentage, with: "101"
+    fill_in :quantity_threshold, with: "3"
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{big_deal.id}/edit")
+    expect(page).to have_content("Please enter a discount value between 1 and 100")
+
+    fill_in :name, with: "Bigger Deal"
     fill_in :discount_percentage, with: "30"
     fill_in :quantity_threshold, with: "3"
-    # save_and_open_page
     click_button "Submit"
+
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/#{big_deal.id}")
     expect(page).to have_content("30")
     expect(page).to have_content("3")
