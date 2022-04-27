@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <% flash.each do |type, message| %>
+      <p style='color:red; font-size:30px;'><b><%= "#{type.upcase}: #{message}" %></b></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

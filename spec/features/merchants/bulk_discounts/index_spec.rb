@@ -42,6 +42,21 @@ RSpec.describe 'Bulk Discounts index' do
 
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
     fill_in :name, with: "Deal of the Week"
+    fill_in :discount_percentage, with: ""
+    fill_in :quantity_threshold, with: "3"
+    click_button "Submit"
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+    expect(page).to have_content('Please fill out all fields')
+
+    fill_in :name, with: "Deal of the Week"
+    fill_in :discount_percentage, with: "101"
+    fill_in :quantity_threshold, with: "3"
+    click_button "Submit"
+
+    expect(current_path).to eq("/merchants/#{merchant_1.id}/bulk_discounts/new")
+    expect(page).to have_content('Please enter a discount value between 1 and 100')
+
+    fill_in :name, with: "Deal of the Week"
     fill_in :discount_percentage, with: "80"
     fill_in :quantity_threshold, with: "3"
     click_button "Submit"
