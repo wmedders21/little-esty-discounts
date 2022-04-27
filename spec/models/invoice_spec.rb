@@ -91,6 +91,74 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe 'instance methods' do
+
+      it '#dates' do
+        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+        expect(invoice_1.dates).to eq('Tuesday, April 05, 2022')
+      end
+
+      it '#full_name' do
+        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+        expect(invoice_1.full_name).to eq('Bob Benson')
+      end
+
+      it '#invoice_total_revenue' do
+        merchant = Merchant.create(name: "Braum's")
+        item1 = merchant.items.create(name: "Toaster", description: "Four slots", unit_price: 1000)
+        item2 = merchant.items.create(name: "Poleaxe", description: "8 foot reach!", unit_price: 1000)
+
+        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+
+        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+
+        invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
+        invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+
+        expect(invoice_1.invoice_total_revenue).to eq(267000)
+      end
+
+      it '#merchant_invoice_revenue' do
+        merchant = Merchant.create(name: "Braum's")
+        merchant_2 = Merchant.create(name: "Selly MacSellerson")
+        item1 = merchant.items.create(name: "Toaster", description: "Four slots", unit_price: 1000)
+        item2 = merchant.items.create(name: "Poleaxe", description: "8 foot reach!", unit_price: 1000)
+        item3 = merchant_2.items.create(name: "Canned Frog Legs", description: "Half pound", unit_price: 10000)
+
+        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+
+        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+
+        invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
+        invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+        invoice_item_3 = item3.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+
+        expect(invoice_1.merchant_invoice_revenue(merchant.id)).to eq(267000)
+      end
+
+      it '#merchant_discounted_revenue' do
+        merchant = Merchant.create(name: "Braum's")
+        merchant_2 = Merchant.create(name: "Selly MacSellerson")
+
+        item1 = merchant.items.create(name: "Toaster", description: "Four slots", unit_price: 1000)
+        item2 = merchant.items.create(name: "Poleaxe", description: "8 foot reach!", unit_price: 1000)
+        item3 = merchant_2.items.create(name: "Canned Frog Legs", description: "Half pound", unit_price: 10000)
+
+        bob = Customer.create!(first_name: "Bob", last_name: "Benson")
+
+        invoice_1 = bob.invoices.create!(status: 1, created_at: '05 Apr 2022 00:53:36 UTC +00:00')
+
+        invoice_item_1 = item1.invoice_items.create(invoice_id:invoice_1.id, quantity:45, unit_price: 1000)
+        invoice_item_2 = item2.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+        invoice_item_3 = item3.invoice_items.create(invoice_id:invoice_1.id, quantity:222, unit_price: 1000)
+
+        merchant.bulk_discounts.create!(name: 'Mega Liquidation', discount_percentage: 50, quantity_threshold: 100)
+        merchant.bulk_discounts.create!(name: 'Yeehaw Sale', discount_percentage: 30, quantity_threshold: 40)
+
+        expect(invoice_1.merchant_discounted_revenue(merchant.id)).to eq(142500)
+      end
+
       it '#discounted_revenue' do
         merchant = Merchant.create(name: "Braum's")
         item1 = merchant.items.create(name: "Toaster", description: "Four slots", unit_price: 1000)
