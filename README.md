@@ -1,15 +1,14 @@
-# Little Esty Shop
+# Little Esty Discounts
 
 ## Table of Contents
 - [Overview](#overview)
 - [Learning Goals](#learning-goals)
 - [Tools Used](#tools-used)
-- [Features](#features)
 - [Database Schema](#database-schema)
 
 ## Overview
-[Little Esty Shop](https://little-esty-shop-jwld.herokuapp.com/admin) is a 12 day project assigned during Turing's Mod 2 of backend development.
-This is an attempt to recreate an online store using Rails and CRUD functionality.
+[Little Esty Discounts](https://little-esty-discount.herokuapp.com/) is a week-long solo extension of the group project [Little Esty Shop](https://github.com/turingschool-examples/little-esty-shop) assigned during Mod 2 the backend development program at Turing.
+This project adds a feature where merchants can create, update, and delete mulitple bulk discounts for items in their online store. There is also an API call to Nager Date used to display the next three upcoming US holidays our merchants bulk discounts index page. 
 
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
@@ -22,19 +21,9 @@ This is an attempt to recreate an online store using Rails and CRUD functionalit
 - Ruby
 - Postgresql
 - CRUD
-- Postico
+- HTTParty
+- JSON
 - RESTful
 
-## Features
-- Can determine top fives of merchants, merchant days and item count
-- Allows the admin to update files
-- Uses MVC strategy of development
-
 ## Database Schema
-![Schema](/Users/lukepascale/turing/2module/projects/little-esty-shop/app/assets/images/little_esty_shop_schema.png)
-
-## Contributors - Github User Names
-- Will Medders - @wmedders21
-- James Harkins - @James-Harkins
-- Drew Proebstel - @DrewProebstel
-- Luke Pascale - @enalihai
+<img width="1757" alt="Screen Shot 2022-04-24 at 5 41 00 PM" src="https://user-images.githubusercontent.com/93014155/165521044-df5d8127-5a5d-4b7c-aea7-e5902e122a8e.png">
