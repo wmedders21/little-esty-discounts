@@ -12,12 +12,12 @@ class InvoiceItem < ApplicationRecord
     sum('unit_price * quantity')
   end
 
-  def invoice_dates
-    invoice.created_at.strftime("%A, %B %d, %Y")
-  end
-
   def self.ready_to_ship
     where(status: "packaged").order('created_at DESC')
+  end
+
+  def invoice_dates
+    invoice.created_at.strftime("%A, %B %d, %Y")
   end
 
   def belongs_to_merchant(merchant_id)

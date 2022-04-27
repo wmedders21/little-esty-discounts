@@ -23,7 +23,7 @@ group :development, :test do
   gem 'orderly'
   gem 'shoulda-matchers'
   gem 'simplecov'
-
+  gem 'timecop'
 end
 
 group :development do
